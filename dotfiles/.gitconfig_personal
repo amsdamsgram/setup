@@ -1,12 +1,9 @@
 [user]
-  name = Maxime Thirouin
-  email = m@moox.io
+  name = Damien Soulard
+  email = damien.soulard@gmail.com
 
 [github]
-  user = MoOx
-
-[ghi]
-  token = !security find-internet-password -a MoOx -s github.com -l 'ghi token' -w
+  user = idams
 
 [core]
   editor = atom -w

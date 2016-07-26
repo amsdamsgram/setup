@@ -3,47 +3,21 @@
 brewcaskinstall "HyperTerm"
 
 # browser
-brewcaskinstall "FirefoxNightly"
-openifnot "FirefoxNightly"
-setupsh-recipe firefox-user.js
+brewcaskinstall "firefoxdeveloperedition"
 
 ## Ssh
 setupsh-recipe ssh
 
-## GPG
-brewcaskinstall "GPG Keychain" gpgtools
-# contains gnupg gpg-agent pinentry + GPG keychain UI
-
 ## Zsh completion
 brewinstall zsh-completions
-
-# one keyboard/mouse for multiples machines
-if ls /Applications/Synergy.app &> /dev/null
-then
-  open "http://synergy-project.org/"
-  setupsh-accessibility-privacy-apps --insert synergy
-fi
-
-brewcaskinstall "Spectacle"
-
-## Sync
-## syncthing consume too much CPU for now (at least with 0.12)
-# brewcaskinstall "syncthing"
-# brewcaskinstall "QSyncthingTray"
-brewcaskinstall "BitTorrent Sync"
-openifnot "BitTorrent Sync"
-setupsh-recipe custom-folders
 
 ## Some utilities
 brewcaskinstall "Flux"
 openifnot "Flux"
-brewcaskinstall "iStat Menus"
-openifnot "iStat Menus"
 
 ## Development
 setupsh-recipe git
 brewcaskinstall atom
-brewcaskinstall "GitHub Desktop"
 
 ### Node
 setupsh-recipe nvm
@@ -52,10 +26,6 @@ nvm install default --reinstall-packages-from=node
 npm config set progress false
 npm config set cache-min 20000 # 6 hours (60*60*6)
 
-
-# MAXIMUM SECURITY
-brewcaskinstall "KeePassX"
-
 if [ "$FIRSTRUN" = "true" ]; then osx-refresh; fi;
 
 # safer than rm
@@ -63,10 +33,8 @@ npmig trash-cli
 
 brewcaskinstall "WebTorrent"
 brewcaskinstall "VLC"
-brewcaskinstall "MPlayerX"
 
 # apps
-brewcaskinstall "Prefs Editor"
 brewcaskinstall "AppCleaner"
 openifnot "AppCleaner"
 
@@ -74,11 +42,6 @@ openifnot "AppCleaner"
 # Stuff that are slow to download
 # or that require human interaction
 ##
-# dyndns
-setupsh-recipe ddclient
-
-# anti-thef
-setupsh-recipe prey
 
 ##
 # Less important stuff
@@ -88,24 +51,17 @@ setupsh-recipe prey
 if [ "$FIRSTRUN" = "" ]
 then
   # messaging
-  brewcaskinstall "Caprine" # Facebook Messenger
   brewcaskinstall "Slack"
   brewcaskinstall "Discord"
-  brewcaskinstall "Gitter"
-  brewcaskinstall "Telegram"
-  brewcaskinstall "HipChat"
   brewcaskinstall "Skype"
+  brewcaskinstall "WhatsApp"
+
+  # social
+  brewcaskinstall "Twitter"
 
   # MORE BROWSER
   brewcaskinstall "Firefox"
   brewcaskinstall "Google Chrome"
-  # brewcaskinstall "/usr/local/bin/phantomjs" "phantomjs"
-
-  # OSS / Package helpers
-  npmig greenkeeper
-  npmig github-labels
-  npmig npm-check
-  npmig updtr
 
   # vm and shit
   # brewcaskinstall "VirtualBox"
@@ -118,37 +74,6 @@ then
   # https://github.com/caskroom/homebrew-cask/blob/master/CONTRIBUTING.md#updating-a-cask
   # brewinstall vitorgalvao/tiny-scripts/cask-repair
 
-  # YEAH I USE THAT
-  brewcaskinstall "/Library/Java/JavaVirtualMachines" "java"
-  brewcaskinstall "LibreOffice"
-
-  # image
-  brewcaskinstall "imageoptim"
-
   # multimedia
-  brewcaskinstall "Last.fm" "lastfm"
-  brewcaskinstall "Jubler"
-
-  # VIDEO GAMES \o/
-  brewcaskinstall "Steam"
-
-  # Because sometimes...
-  brewcaskinstall "Transmission"
-  brewcaskinstall "Cyberduck"
-
-  # Data/Disk related
-  brewcaskinstall "NameChanger"
-  brewcaskinstall "GrandPerspective"
-  brewcaskinstall "SuperDuper!" "superduper"
-fi
-
-if [[ $COMPUTER_NAME == "iMoOx" ]]
-then
-  # for my mouse
-  brewcaskinstall "/Library/PreferencePanes/Logitech Control Center.prefPane" "logitech-control-center"
-  brewcaskinstall "Utilities/Logitech Unifying Software" "logitech-unifying"
-
-  # Better perf for non Apple SSD
-  # at the end because need reboot
-  #sudo trimforce enable
+  brewcaskinstall "Spotify"
 fi

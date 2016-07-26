@@ -1,14 +1,9 @@
 [include]
-  # this include my user.signingkey
-  path = ~/.gitconfig_local
   # personal non sensible data
   path = ~/.gitconfig_personal
 
   # aliases
   path = ~/.gitconfig_aliases
-
-[credential]
-  helper = osxkeychain
 
 [hub]
   protocol = https
@@ -20,12 +15,6 @@
   insteadOf = https://gitlab.com/
 [url "ssh://git@bitbucket.org/"]
   insteadOf = https://bitbucket.org/
-
-[gpg]
-  program = /usr/local/bin/gpg
-
-[commit]
-  gpgsign = true
 
 [pull]
   rebase = true
@@ -76,18 +65,3 @@
 
 [color "status"]
   untracked = cyan
-
-# Filters
-
-[filter "media"]
-  required = true
-  clean = git media clean %f
-  smudge = git media smudge %f
-[filter "hawser"]
-  clean = git hawser clean %f
-  smudge = git hawser smudge %f
-  required = true
-[filter "lfs"]
-  clean = git lfs clean %f
-  smudge = git lfs smudge %f
-  required = true

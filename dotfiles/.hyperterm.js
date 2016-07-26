@@ -4,7 +4,7 @@ module.exports = {
     fontSize: 16,
 
     // font family with optional fallbacks
-    fontFamily: 'Operator Mono, monospace',
+    fontFamily: 'Fira Mono',
 
     // terminal cursor background color (hex)
     cursorColor: '#F81CE5',
@@ -56,27 +56,13 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-    // Cursor blink
-    'hyperterm-blink', // https://www.npmjs.com/package/hyperterm-blink
-    // Atom like One Dark theme
-    'hyperterm-atom-dark', // https://www.npmjs.com/package/hyperterm-atom-dark
-    // Open new tabs with the same CWD as the previous one
-    'hypercwd', // https://www.npmjs.com/package/hypercwd
-    // Quake-like
-    'hyperterm-visor', // https://www.npmjs.com/package/hyperterm-visor
-    // 'hyperline', // https://www.npmjs.com/package/hyperline
-    // 'hyperpower', // RAGE MODE https://www.npmjs.com/package/hyperpower
+    'hypercwd',
+    'hyperterm-material',
+    'hyperterm-blink'
   ],
-
-  // hyperterm-visor
-  visor: {
-    hotkey: 'CommandOrControl+Shift+Z',
-    position: 'top', // or left, right, bottom
-  },
 
   // in development, you can create a directory under
   // `~/.hyperterm_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed
-  localPlugins: [
-  ]
+  localPlugins: []
 };

@@ -1,10 +1,6 @@
 #!/usr/bin/env zsh
 
-# Profiling zshrc speed
-# http://www.rosipov.com/blog/profiling-slow-bashrc/
-# PS4='+ $(date "+%s.%N")\011 '
-# exec 3>&2 2>$HOME/Desktop/zshstart.$$.log
-# set -x
+export EDITOR="atom"
 
 # export PATH
 # OS X 10.10+ doesn't execute /etc/launchd.conf
@@ -25,15 +21,7 @@ if [[ -z "$SETUP_PATH" ]] then
   export SETUP_PATH=$(cd $(dirname $(readlink $__FILENAME__))/../../ && pwd)
 fi
 
-export DIR_SYNC=$HOME/Sync
-export DIR_DEV=$DIR_SYNC/Development
 
-# add personal bin in the path
-export PATH=$PATH:./bin
-export PATH=$PATH:./.bin
-export PATH=$DIR_DEV/.bin:$PATH
-
-export EDITOR="atom"
 source $SETUP_PATH/submodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 HISTFILE=~/.history
@@ -77,45 +65,12 @@ prompt pure
 # add %F{red}%(?..[%?] )%f to include exit code [code]
 PROMPT='%(?.%F{green}.%F{red}❯%F{green})❯%f '
 
-export OS_ICONS_DIR=/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources
-
-# also load aliases from projets
-if [[ -d $DIR_DEV ]]
-then
-  for source in `find $DIR_DEV -d -maxdepth 4 -name \*.aliases  | perl -lne 'print tr:/::, " $_"' | sort -n | cut -d' ' -f2`
-  do
-    source $source
-  done
-fi
-
-# disable ._ file
-export COPYFILE_DISABLE=true
-
-
-alias list-aliases="alias | sed 's/=.*//'"
-alias list-functions="declare -f | grep '^[a-z].* () {' | sed 's/{$//'" # show non _prefixed functions
-alias list="cat <(list-aliases) <(list-functions) | sort"
-alias search="list | grep"
-
-# Aliases
-
-alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
-alias fak='fuck'
 
 ## OS X
 alias osx-hidden-show="defaults write com.apple.finder AppleShowAllFiles -bool true && osx-refresh"
 alias osx-hidden-hide="defaults write com.apple.finder AppleShowAllFiles -bool false && osx-refresh"
 alias osx-desktop-show="defaults write com.apple.finder CreateDesktop -bool true && osx-refresh"
 alias osx-desktop-hide="defaults write com.apple.finder CreateDesktop -bool false && osx-refresh"
-# http://apple.stackexchange.com/a/181404/34887
-alias osx-internetsharing-on="sudo networksetup -setnetworkserviceenabled 'Ethernet sharing via Wifi' on"
-alias osx-internetsharing-off="sudo networksetup -setnetworkserviceenabled 'Ethernet sharing via Wifi' off"
-alias osx-resolutions="system_profiler SPDisplaysDataType | grep Resolution | tr -d ' '"
-alias osx-flushdns="dscacheutil -flushcache"
-alias osx-flushram="purge"
-export OSX_INSTALL_APP="/Applications/Install OS X El Capitan.app"
-alias osx-bootableusb="sudo \"$OSX_INSTALL_APP/Contents/Resources/createinstallmedia\" --volume /Volumes/Untitled --applicationpath \"$OSX_INSTALL_APP\" --nointeraction"
-alias osx-dsstore-delete="find . -type f -name '*.DS_Store' -ls -delete"
 
 ## NVM
 export NVM_DIR=$HOME/.nvm
@@ -133,30 +88,9 @@ alias nid="npm i -D"
 alias ns="npm -s start --"
 alias nt="npm -s test --"
 alias nr="npm run -s"
-alias nts="nr tests --"
-alias ntc="nr test-with-coverage --"
-alias np="nr release --"
-alias npf="nr release -- --skip-cleanup"
-ntm() { nts -- "web_modules/$1/__tests__/*.js" }
 
-### allow local self signed https server
-export NODE_TLS_REJECT_UNAUTHORIZED="0"
-
-### to avoid npm install -g
-export PATH=$PATH:./node_modules/.bin
-
-## Apache
-APACHE_CONF_DEV_PATH=$DIR_DEV/_.conf/apache/
-alias apacheconf="e $APACHE_CONF"
-alias apachedevconf="e $APACHE_CONF_DEV_PATH"
-alias apacheconfigtest="apachectl configtest"
-alias apachestart="sudo apachectl start"
-alias apacherestart="dscacheutil -flushcache && apachectl configtest && sudo apachectl restart"
-alias apacheaddconf="e $APACHE_CONF_DEV_PATH/local.conf /etc/hosts"
-
-## MySQL (from brew)
-alias mysqlstart="mysql.server start"
-alias mysqlstop="mysql.server stop"
+alias echofliptable="echo '\n(╯°□°）╯︵ ┻━┻\n'"
+alias fliptable="echo \"$USER/setup\"; echofliptable; setupsh-update; setupsh-run"
 
 ## Git
 alias git="hub"
@@ -165,93 +99,6 @@ alias g="git"
 ## Network
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
-alias elocalip="export LOCAL_IP=$(localip)"
-alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\)\|[a-fA-F0-9:]\+\)' | sed -e 's/inet6* //'"
-alias whois="whois -h whois-servers.net" # Enhanced WHOIS lookups
-
-## Synergy.app
-alias synergy="/Applications/Synergy.app/Contents/MacOS/synergy"
-alias synergys="/Applications/Synergy.app/Contents/MacOS/synergys"
-alias synergyc="/Applications/Synergy.app/Contents/MacOS/synergyc"
-alias synergyshome="synergys -n iMoOx"
-alias synergychome="synergyc -n MacMoOx iMoOx.local"
-
-# ssh-copy-id
-# usage: sshcopy user@server [-p {port}]
-alias sshcopy="ssh-copy-id -i ~/.ssh/id_rsa.pub"
-
-# php
-export PHP_VERSION=56
-export PHP_VERSION_DOT=5.6
-if ls /usr/local/Cellar/php$PHP_VERSION &> /dev/null
-then
-  export PHP_INI=/usr/local/etc/php/$PHP_VERSION_DOT/php.ini
-  alias phpini="e $PHP_INI"
-fi
-
-## LOCAL STUFF
-if [[ -f ~/.zshrc.local ]]; then; source ~/.zshrc.local; fi
-
-# custom aliases
-alias gh="/Applications/GitHub\ Desktop.app/Contents/MacOS/github_cli"
-alias .e="setupsh-edit"
-alias .o="setupsh-open"
-alias wifi=osx-internetsharing-on
-alias wifi-off=osx-internetsharing-off
-alias echofliptable="echo '\n(╯°□°）╯︵ ┻━┻\n'"
-alias fliptable="echo \"$USER/setup\"; echofliptable; setupsh-update; setupsh-run"
-
-# added by travis gem
-# [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
-alias travis-init="source $HOME/.travis/travis.sh"
-
-# Docker
-alias dockermachine="docker-machine start default; eval \"\$(docker-machine env default)\""
-
-# see https://github.com/popomore/github-labels + MoOx/setup/dotfiles/github-issues-labels.json
-alias github-labels="labels -c $HOME/.github-issues-labels.json"
-
-# Android development
-export ANDROID_HOME=/usr/local/opt/android-sdk
-
-# Profiling zshrc speed
-# (see top of the file)
-# set +x
-# exec 2>&3 3>&-
-
-echo_and_run() {
-  echo "\$ $@"
-  "$@"
-}
-
-pbstream() {
-  uri=$(pbpaste)
-  if [[ $uri == magnet:* ]]
-  then
-    export PBSTREAM_LATEST_URI=$uri
-  else
-    echo "pb contains invalid magnet URI, using latest valid URI."
-  fi
-  peerflix $PBSTREAM_LATEST_URI $@
-}
-
-alias mplayer-localhost="open -a MPlayerX --args -url http://localhost:8888/"
-alias pbstream-vlc="pbstream --vlc --not-on-top --no-quit"
-alias pbstream-mplayer="(sleep 120 && mplayer-localhost) & pbstream"
-export pbstream_folder="/tmp/torrent-stream"
-alias pbstream-clean="sudo trash $pbstream_folder"
-alias pbstream-folder="o $pbstream_folder"
-
-## GPG
-# set up gpg-agent automatically for every shell
-# https://gist.github.com/yoshuawuyts/69f25b0384d41b46a126f9b42d1f9db2
-if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]
-then
-  source ~/.gnupg/.gpg-agent-info
-  export GPG_AGENT_INFO
-else
-  eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
-fi
 
 # Show notification when long running command finishes
 # and your terminal is not in focus
