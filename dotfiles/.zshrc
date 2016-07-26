@@ -93,7 +93,6 @@ alias echofliptable="echo '\n(╯°□°）╯︵ ┻━┻\n'"
 alias fliptable="echo \"$USER/setup\"; echofliptable; setupsh-update; setupsh-run"
 
 ## Git
-alias git="hub"
 alias g="git"
 
 ## Network

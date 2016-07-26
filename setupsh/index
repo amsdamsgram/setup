@@ -47,8 +47,6 @@ typeset -U config_files
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit
 compinit
-# load every completion after autocomplete loads
-sourceFiles $SETUP_PATH/setupsh/recipes/*.completion
 
 loadFunctionsFromPath $SETUP_PATH/setupsh/functions
 loadFunctionsFromPath $SETUP_PATH/functions
