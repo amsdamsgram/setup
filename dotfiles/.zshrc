@@ -95,6 +95,9 @@ alias fliptable="echo \"$USER/setup\"; echofliptable; setupsh-update; setupsh-ru
 ## Git
 alias g="git"
 
+## React Native
+alias rn="react-native"
+
 ## Network
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
