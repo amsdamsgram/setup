@@ -89,6 +89,9 @@ alias ns="npm -s start --"
 alias nt="npm -s test --"
 alias nr="npm run -s"
 
+## YARN
+alias y="yarn"
+
 alias echofliptable="echo '\n(╯°□°）╯︵ ┻━┻\n'"
 alias fliptable="echo \"$USER/setup\"; echofliptable; setupsh-update; setupsh-run"
 
