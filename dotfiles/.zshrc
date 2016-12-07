@@ -11,6 +11,8 @@ export EDITOR="atom"
 # export PATH=$(cat /etc/paths | xargs | tr " " :)
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 
+export ANDROID_HOME=/Users/iDams/Library/Android/sdk
+
 #$SETUP_PATH doesn't exist yet
 source $HOME/setup/setupsh/index
 
@@ -95,6 +97,9 @@ alias y="yarn"
 alias echofliptable="echo '\n(╯°□°）╯︵ ┻━┻\n'"
 alias fliptable="echo \"$USER/setup\"; echofliptable; setupsh-update; setupsh-run"
 
+## YARN
+alias y="yarn"
+
 ## Git
 alias g="git"
 
@@ -116,3 +121,8 @@ function notify_cmd_result_when_terminal_not_focused {
   notify-if-hyperterm-is-in-the-background "$CMD" "$LAST_EXIT_CODE" &
 }
 export PS1='$(notify_cmd_result_when_terminal_not_focused)'$PS1
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export NODE_ENV=development
+export AWS_PROFILE=sliceintel

@@ -16,9 +16,6 @@
 [url "ssh://git@bitbucket.org/"]
   insteadOf = https://bitbucket.org/
 
-[pull]
-  rebase = true
-
 [push]
   # Push only current branch by default
   default = current

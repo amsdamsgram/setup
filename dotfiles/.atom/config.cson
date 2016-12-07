@@ -1,5 +1,21 @@
 "*":
+  "atom-beautify":
+    general:
+      _analyticsUserId: "041b7f65-8d56-4471-9624-bffc939fbe6d"
   core:
+    customFileTypes:
+      "source.ini": [
+        ".buckconfig"
+        ".hgrc"
+        ".flowconfig"
+      ]
+      "source.json": [
+        ".arcconfig"
+        "BUCK.autodeps"
+      ]
+      "source.python": [
+        "BUCK"
+      ]
     disabledPackages: [
       "bookmarks"
       "language-c"
@@ -8,22 +24,18 @@
       "language-csharp"
       "language-go"
       "language-hyperlink"
-      "language-java"
       "language-make"
       "language-mustache"
       "language-objective-c"
       "language-perl"
       "language-python"
-      "language-ruby"
-      "language-ruby-on-rails"
-      "language-sass"
       "language-sql"
       "language-toml"
       "metrics"
       "styleguide"
       "welcome"
-      "linter"
     ]
+    openEmptyEditorOnStart: false
     themes: [
       "seti-ui"
       "duotone-dark-sea-syntax"
@@ -38,5 +50,20 @@
     showInvisibles: true
   "exception-reporting":
     userId: "c6a01a6c-190d-58db-16fe-6d9620c79da8"
+  "linter-eslint":
+    fixOnSave: true
+  nuclide:
+    "nuclide-file-tree":
+      revealFileOnSwitch: true
+      showOpenFiles: false
+    "nuclide-home":
+      showHome: false
+    "nuclide-working-sets": {}
+    use:
+      "nuclide-file-tree": false
+      "nuclide-side-bar": false
+      "nuclide-source-control-side-bar": false
+  "tree-view":
+    hideVcsIgnoredFiles: true
   welcome:
     showOnStartup: false

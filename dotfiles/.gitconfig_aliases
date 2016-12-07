@@ -19,6 +19,7 @@
   ra = rebase --abort
 
   g = pull
+  up = pull --rebase
 
   p = push
   pf = push --force-with-lease
