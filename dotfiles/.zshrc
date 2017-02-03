@@ -97,9 +97,6 @@ alias y="yarn"
 alias echofliptable="echo '\n(╯°□°）╯︵ ┻━┻\n'"
 alias fliptable="echo \"$USER/setup\"; echofliptable; setupsh-update; setupsh-run"
 
-## YARN
-alias y="yarn"
-
 ## Git
 alias g="git"
 
