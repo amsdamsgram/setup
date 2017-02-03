@@ -124,5 +124,3 @@ export PS1='$(notify_cmd_result_when_terminal_not_focused)'$PS1
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-export NODE_ENV=development
-export AWS_PROFILE=sliceintel

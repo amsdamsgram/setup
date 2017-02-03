@@ -63,7 +63,8 @@
       "nuclide-file-tree": false
       "nuclide-side-bar": false
       "nuclide-source-control-side-bar": false
-  "tree-view":
-    hideVcsIgnoredFiles: true
+  "tool-bar":
+    visible: false
+  "tree-view": {}
   welcome:
     showOnStartup: false
